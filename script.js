@@ -3,7 +3,7 @@ const city = "Delhi";
 const locations = ["Anand Vihar", "RK Puram", "Punjabi Bagh", "Dwarka", "ITO", "Ashok Vihar"];
 
 async function fetchAQI() {
-    const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=28.7041&lon=77.1025&appid=${546492f2998a588b63f8fa268a18a87f}`;
+    const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=28.7041&lon=77.1025&appid=${apiKey}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -47,9 +47,9 @@ function updateStatus(aqi) {
 async function fetchTopLocations() {
     const listElement = document.getElementById("pollution-list");
     listElement.innerHTML = "";
-
+    
     for (let loc of locations) {
-        const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=28.7041&lon=77.1025&appid=${546492f2998a588b63f8fa268a18a87f}`;
+        const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=28.7041&lon=77.1025&appid=${apiKey}`;
         try {
             const response = await fetch(url);
             const data = await response.json();
