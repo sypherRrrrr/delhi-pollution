@@ -1,27 +1,56 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
+/* Header */
 header {
-    background-color: #333;
+    background: #6a0572;
     color: white;
-    padding: 15px;
-    font-size: 20px;
+    padding: 20px;
+    font-size: 1.5em;
 }
 
-main {
-    margin-top: 50px;
+/* AQI List */
+.aqi-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    color: #333;
+ul {
+    list-style: none;
+    padding: 0;
 }
 
-#status {
-    font-size: 18px;
+li {
+    font-size: 1.2em;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
     font-weight: bold;
+    color: white;
+}
+
+/* Color Coding Based on AQI */
+.good { background: #2ecc71; }      /* Green */
+.fair { background: #f1c40f; }      /* Yellow */
+.moderate { background: #e67e22; }  /* Orange */
+.poor { background: #e74c3c; }      /* Red */
+.very-poor { background: #8e44ad; } /* Purple */
+.hazardous { background: #2c3e50; } /* Black */
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
 }
