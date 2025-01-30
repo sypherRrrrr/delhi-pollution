@@ -1,67 +1,31 @@
 const apiKey = "546492f2998a588b63f8fa268a18a87f";
-const city = "Delhi";
-const locations = ["Anand Vihar", "RK Puram", "Punjabi Bagh", "Dwarka", "ITO", "Ashok Vihar"];
+const locations = [
+    { name: "Anand Vihar", lat: 28.6492, lon: 77.3027 },
+    { name: "RK Puram", lat: 28.5665, lon: 77.1734 },
+    { name: "Punjabi Bagh", lat: 28.6723, lon: 77.1310 },
+    { name: "Dwarka", lat: 28.6139, lon: 77.2090 },
+    { name: "ITO", lat: 28.6255, lon: 77.2167 },
+    { name: "Ashok Vihar", lat: 28.7041, lon: 77.1025 }
+];
 
 async function fetchAQI() {
-    const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=28.7041&lon=77.1025&appid=${apiKey}`;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data && data.list && data.list.length > 0) {
-            const aqi = data.list[0].main.aqi;
-            document.getElementById("aqi").textContent = aqi;
-            updateStatus(aqi);
-            fetchTopLocations();
-        } else {
-            document.getElementById("aqi").textContent = "Data not available";
-        }
-    } catch (error) {
-        console.error("Error fetching AQI data:", error);
-        document.getElementById("aqi").textContent = "Error loading data";
-    }
-}
-
-function updateStatus(aqi) {
-    let statusText = "";
-    if (aqi === 1) {
-        statusText = "Good";
-        document.body.style.backgroundColor = "#90EE90";
-    } else if (aqi === 2) {
-        statusText = "Fair";
-        document.body.style.backgroundColor = "#FFD700";
-    } else if (aqi === 3) {
-        statusText = "Moderate";
-        document.body.style.backgroundColor = "#FFA500";
-    } else if (aqi === 4) {
-        statusText = "Poor";
-        document.body.style.backgroundColor = "#FF4500";
-        alert("Warning: High pollution levels!");
-    } else {
-        statusText = "Very Poor";
-        document.body.style.backgroundColor = "#8B0000";
-        alert("Severe Pollution Alert! Avoid outdoor activities.");
-    }
-    document.getElementById("status").textContent = statusText;
-}
-
-async function fetchTopLocations() {
     const listElement = document.getElementById("pollution-list");
     listElement.innerHTML = "";
     
     for (let loc of locations) {
-        const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=28.7041&lon=77.1025&appid=${apiKey}`;
+        const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${loc.lat}&lon=${loc.lon}&appid=${apiKey}`;
         try {
             const response = await fetch(url);
             const data = await response.json();
-            if (data && data.list && data.list.length > 0) {
+            if (data && data.list.length > 0) {
                 const aqi = data.list[0].main.aqi;
                 const listItem = document.createElement("li");
-                listItem.textContent = `${loc}: AQI ${aqi}`;
+                listItem.textContent = `${loc.name}: AQI ${aqi}`;
                 listItem.className = getAQIClass(aqi);
                 listElement.appendChild(listItem);
             }
         } catch (error) {
-            console.error(`Error fetching AQI data for ${loc}:`, error);
+            console.error(`Error fetching AQI data for ${loc.name}:`, error);
         }
     }
 }
@@ -71,8 +35,10 @@ function getAQIClass(aqi) {
     if (aqi === 2) return "fair";
     if (aqi === 3) return "moderate";
     if (aqi === 4) return "poor";
-    return "very-poor";
+    if (aqi === 5) return "very-poor";
+    return "hazardous";
 }
 
-fetchAQI();
+document.addEventListener("DOMContentLoaded", fetchAQI);
 setInterval(fetchAQI, 60000);
+
