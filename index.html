@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delhi Pollution Monitor</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delhi Air Quality</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-<header>
-  <h1>Delhi Real-Time Pollution Monitor</h1>
-</header>
-<main>
-  <h2>Current Air Quality Index (AQI) in Delhi: <span id="aqi">Loading...</span></h2>
-  <p id="status"></p>
-  <h3>Top Polluted Areas in Delhi</h3>
-  <ul id="pollution-list"></ul>
-</main>
-<script src="script.js"></script>
+    <header>
+        <h1>Air Quality in Delhi</h1>
+        <p>Real-time AQI data for major locations in Delhi</p>
+    </header>
+
+    <main>
+        <div class="aqi-container">
+            <ul id="pollution-list"></ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>Data provided by OpenWeather API</p>
+    </footer>
 </body>
 </html>
+
